@@ -15,3 +15,9 @@ class UserSerializers(marshmallow.SQLAlchemyAutoSchema):
         ''' Meta Definition for UserSerializers '''
         model = User
         include_fk = True
+
+
+# Schema for single get
+user_schema = UserSerializers()
+# Schema for Lists
+users_schema = UserSerializers(many=True)

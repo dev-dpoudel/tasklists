@@ -19,9 +19,9 @@ def create_app(mode_config=None):
         app.config.from_object('config.Config')
 
     CORS(app)
-    db.__init__(app)
+    db.init_app(app)
     migrate.init_app(app, db)
-    marshmallow.__init__(app)
+    marshmallow.init_app(app)
 
     # Register Views
     from .controllers import active_controllers

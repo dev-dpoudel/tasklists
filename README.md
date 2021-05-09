@@ -19,3 +19,5 @@ The project provides a basic api support for task management and enterprise desk
 5. flask-email : email source
 
 Note: For development purpose SMTP are selected as free tier.
+
+https://stackoverflow.com/questions/19323990/flask-migrate-not-creating-tables

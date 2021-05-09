@@ -13,3 +13,9 @@ class TaskSerializers(marshmallow.SQLAlchemyAutoSchema):
         ''' Meta Definition for TaskSerializers '''
         model = Task
         include_fk = True
+
+
+# Single Schema
+task_schema = TaskSerializers()
+# Multiple Schema
+task_schema = TaskSerializers(many=True)

@@ -1,6 +1,6 @@
 from flask_classful import FlaskView
 from .models import User
-from .serializers import UserSerializers
+from .serializers import user_schema
 
 
 class UserView(FlaskView):
@@ -11,4 +11,4 @@ class UserView(FlaskView):
     def index(self):
         ''' Base Endpoint for User '''
         users = User.query.all()
-        return UserSerializers(**users)
+        return user_schema.jsonify(users), 200
