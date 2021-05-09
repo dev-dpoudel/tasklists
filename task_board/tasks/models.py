@@ -10,9 +10,10 @@ class Task(db.Model):
         db.Integer,
         primary_key=True
     )
-    user = db.Column(
+    user_id = db.Column(
         db.Integer,
-        db.ForeignKey('person.id', nullable=False)
+        db.ForeignKey('users.id'),
+        nullable=False
     )
     priority = db.Column(
         db.String(16),

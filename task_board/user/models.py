@@ -25,7 +25,7 @@ class User(db.Model):
         unique=True,
         nullable=False
     )
-    tasks = db.relationship('Task', backref='user', lazy=True)
+    tasks = db.relationship('Task', backref='users', lazy=True)
 
     def __repr__(self):
         return '<User {0} {1}>'.format(self.first_name, self.last_name)

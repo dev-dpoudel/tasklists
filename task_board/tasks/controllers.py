@@ -1,14 +1,14 @@
 from flask_classful import FlaskView
-from .models import User
-from .serialzers import TaskSerializers
+from .models import Task
+from .serializers import TaskSerializers
 
 
 class TaskView(FlaskView):
     ''' Provides API Endpoint for User Models '''
     # : Route Prefix for Views
-    route_prefix = '/user/'
+    route_prefix = '/task/'
 
     def index(self):
         ''' Base Endpoint for User '''
-        users = User.object.get.all()
-        return TaskSerializers(**users)
+        tasks = Task.query.all()
+        return TaskSerializers(**tasks)
