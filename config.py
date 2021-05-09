@@ -11,6 +11,7 @@ class Config:
     SECRET_KEY = environ.get('SECRET_KEY')
     SESSION_COOKIE_NAME = environ.get('SESSION_COOKIE_NAME')
     SESSION_TYPE = environ.get('SESSION_TYPE')
+    SQLALCHEMY_DATABASE_URI = environ.get('SQLALCHEMY_DATABASE_URI').format(basedir) # noqa
 
 
 class TestConfig(Config):
