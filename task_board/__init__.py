@@ -1,5 +1,8 @@
 from flask import Flask
 from flask_cors import CORS
+from flask_celery import Celery
+
+celery = Celery()
 
 
 def create_app(mode_config=None):
@@ -12,5 +15,5 @@ def create_app(mode_config=None):
         app.config.from_object('config.Config')
 
     CORS(app)
-
+    celery.__init__(app)
     return app
