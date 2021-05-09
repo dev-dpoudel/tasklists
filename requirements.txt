@@ -9,7 +9,6 @@ click-plugins==1.1.1
 click-repl==0.1.6
 Flask==1.1.2
 Flask-Alembic==2.0.1
-Flask-Celery==2.4.3
 Flask-Classful==0.14.2
 Flask-Cors==3.0.10
 Flask-Email==1.4.4
