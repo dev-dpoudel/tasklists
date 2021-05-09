@@ -11,4 +11,4 @@ class TaskView(FlaskView):
     def index(self):
         ''' Base Endpoint for User '''
         tasks = Task.query.all()
-        return task_schema.jsonify(**tasks)
+        return task_schema.jsonify(tasks)
