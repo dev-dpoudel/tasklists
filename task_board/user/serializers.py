@@ -1,16 +1,17 @@
 from task_board import marshmallow
 from .models import User
+from marshmallow import fields
 
 
 class UserSerializers(marshmallow.SQLAlchemyAutoSchema):
-    ''' Serializer class for Tasks '''
+    ''' Serializer class for User '''
 
     # password is "write-only"
-    password = marshmallow.fields.Str(load_only=True)
+    password = fields.Str(load_only=True)
     # created_at is "read-only"
-    created_at = marshmallow.fields.DateTime(dump_only=True)
+    created_at = fields.DateTime(dump_only=True)
 
     class Meta:
-        ''' Meta Definition for TaskSerializers '''
+        ''' Meta Definition for UserSerializers '''
         model = User
         include_fk = True
