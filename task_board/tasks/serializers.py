@@ -18,4 +18,4 @@ class TaskSerializers(marshmallow.SQLAlchemyAutoSchema):
 # Single Schema
 task_schema = TaskSerializers()
 # Multiple Schema
-task_schema = TaskSerializers(many=True)
+task_schemas = TaskSerializers(many=True)

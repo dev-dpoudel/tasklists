@@ -10,6 +10,8 @@ class UserSerializers(marshmallow.SQLAlchemyAutoSchema):
     password = fields.Str(load_only=True)
     # created_at is "read-only"
     created_at = fields.DateTime(dump_only=True)
+    # Nested Model Serialization
+    tasks = marshmallow.Nested("TaskSerializers", many=True)
 
     class Meta:
         ''' Meta Definition for UserSerializers '''
@@ -20,4 +22,4 @@ class UserSerializers(marshmallow.SQLAlchemyAutoSchema):
 # Schema for single get
 user_schema = UserSerializers()
 # Schema for Lists
-users_schema = UserSerializers(many=True)
+user_schemas = UserSerializers(many=True)
