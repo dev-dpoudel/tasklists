@@ -1,49 +1,50 @@
 from flask import url_for, request
 from flask_classful import FlaskView, route
 from .models import Task
-from .serializers import task_schema, task_schemas
+from .serializers import TaskSerializers
 from task_board import db
+from task_board.viewMixin import BaseVeiwMixin
 
 
-class TaskView(FlaskView):
+class TaskView(FlaskView, BaseVeiwMixin):
     ''' Provides API Endpoint for Task Models '''
     # : Route Prefix for Views
     route_prefix = '/task/'
+    Model = Task
+    Serializer = TaskSerializers
+    session = db.session
 
-    def get(self, id):
+    def index(self):
         ''' Base Endpoint for Task '''
-        tasks = Task.query.filter_by(id=id)
-        return task_schemas.jsonify(tasks)
+        return self._index()
+
+    def get(self, pk):
+        ''' Base Endpoint for Task '''
+        return self._get(pk)
 
     def resource(self):
         '''Resource Endpoint for Task '''
         return {"url": url_for("TaskView:post")}
-        tasks = Task.query.all()
-        return task_schemas.jsonify(tasks)
 
-    @route("/create/", methods=["post"])
+    @route("/", methods=["POST"])
     def post(self):
         ''' Create a Task instance '''
-        data = task_schema.load(request.json['tasks'], partial=True)
-        post = Task(**data)
-        db.session.add(post)
-        db.session.commit()
-        result = task_schema.dump(post)
-        return {"data": result}
+        data = request.args["task"]
+        return self._post(input_data=data)
 
-    @route("/update/", methods=["put"])
-    def update(self):
+    @route("/", methods=["PUT"])
+    def put(self):
         ''' Update a Task Instance '''
-        return {"success": True}
+        data = request.args["task"]
+        return self._put(input_data=data)
 
-    @route("/update/", methods=["patch"])
-    def patch(self):
+    @route("/<int:pk>", methods=["PATCH"])
+    def patch(self, pk):
         ''' Patch a Task Instance '''
-        return {"success": True}
+        data = request.args["task"]
+        return self._patch(pk=pk, input_data=data)
 
-    @route("/delete/<int:pk>", methods=["delete"])
+    @route("/<int:pk>", methods=["DELETE"])
     def delete(self, pk):
         ''' Delete a Task Instance '''
-        Task.query.filter(id=pk).delete()
-        db.session.commit()
-        return {"success": True}
+        return self._delete(pk)

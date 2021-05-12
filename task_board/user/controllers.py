@@ -24,7 +24,7 @@ class UserView(FlaskView):
         user = User.query.get(id)
         return user_schema.jsonify(user)
 
-    @route("/create/", methods=["POST"])
+    @route("/", methods=["POST"])
     def post(self):
         ''' Create a User instance '''
         data = user_schema.load(request.json['users'])
@@ -34,7 +34,7 @@ class UserView(FlaskView):
         result = user_schema.dump(post)
         return {"data": result}
 
-    @route("/<int:pk>/", methods=["PUT"])
+    @route("/<int:pk>", methods=["PUT"])
     def put(self, pk):
         ''' Update a User Instance '''
         data = user_schema.load(request.json['users'])
@@ -42,7 +42,7 @@ class UserView(FlaskView):
         db.session.commit()
         return {"success": True}
 
-    @route("/<int:pk>/", methods=["PATCH"])
+    @route("/<int:pk>", methods=["PATCH"])
     def patch(self, pk):
         ''' Patch a User Instance '''
         data = user_schema.load(request.json['users'], partial=True)
